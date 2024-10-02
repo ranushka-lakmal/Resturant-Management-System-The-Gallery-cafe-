@@ -4,6 +4,11 @@ session_start();
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
 }
+if ($_SESSION['role'] !== 'admin') {
+    echo '<script>window.location="login.php";</script>';
+	session_destroy();
+    exit();
+}
 ?>
 
 <!doctype html>

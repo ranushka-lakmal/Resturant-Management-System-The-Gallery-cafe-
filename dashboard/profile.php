@@ -7,6 +7,12 @@ if (!isset($_SESSION['isLoggedIn'])) {
     exit();
 }
 
+if ($_SESSION['role'] !== 'admin') {
+    echo '<script>window.location="login.php";</script>';
+	session_destroy();
+    exit();
+}
+
 // Include DB connection
 include 'dbCon.php';
 $con = connect();

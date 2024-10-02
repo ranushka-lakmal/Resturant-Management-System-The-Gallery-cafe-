@@ -5,7 +5,7 @@
     <!-- END nav -->
     
     <section class="home-slider owl-carousel" style="height: 400px;">
-      <div class="slider-item" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+      <div class="slider-item" style="background-image: url('images/user-login.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
           <div class="row slider-text align-items-center justify-content-center">
@@ -79,8 +79,8 @@
 </html>
 
 <?php 
-  if (isset($_POST['login'])) {
-    
+if (isset($_POST['login'])) {
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -96,6 +96,13 @@
         echo '<script>window.location="login.php"</script>';
     } else {
         $user = $emailResult->fetch_assoc();
+
+        // Check if the role is "user" first
+        if ($user['role'] !== 'user') {
+            echo '<script>alert("Access denied. You are not allowed to log in.")</script>';
+            echo '<script>window.location="login.php";</script>';
+            exit(); // Ensure no further code runs
+        }
 
         // Hash the input password using MD5
         $hashedPassword = md5($password);
@@ -113,18 +120,23 @@
                 echo '<script>alert("Your account has been deactivated by the admin.")</script>';
                 echo '<script>window.location="login.php"</script>';
             } else {
-                // Successful login
+                // Successful login for role 'user'
+                session_start(); // Ensure session is started if not already
+
                 $_SESSION['isLoggedIn'] = TRUE;
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['phone'] = $user['phone'];
                 $_SESSION['role'] = $user['role'];
+                $_SESSION['user_role'] = 'user'; 
+                $_SESSION['address'] = $user['address'];
+                $_SESSION['gender'] = $user['gender'];
 
                 // Success message and redirection
                 echo '<script>alert("Login Successful!"); window.location="index.php";</script>';
             }
         }
     }
-  }
+}
 ?>

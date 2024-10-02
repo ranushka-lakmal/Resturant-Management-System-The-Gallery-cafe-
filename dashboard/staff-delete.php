@@ -3,6 +3,7 @@ session_start();
 include 'dbCon.php';
 $con = connect();
 
+
 // Check if the empId is provided
 if (isset($_GET['empId'])) {
     $empId = $_GET['empId'];

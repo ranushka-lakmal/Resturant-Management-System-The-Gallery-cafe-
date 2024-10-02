@@ -2,7 +2,7 @@
       <div class="container-fluid">
         <div class="row no-gutters justify-content-center pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
-            <h2><span>Instagram</span></h2>
+            <h2><span>Gallery</span></h2>
           </div>
         </div>
         <div class="row no-gutters">

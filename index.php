@@ -44,15 +44,15 @@ session_start();
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section text-center ftco-animate">
-          <h1 class="mb-4 text-uppercase" style="color:white"><b>Make a Table Reservation</b></h1>
-          <p class="text-light">Book your table now and enjoy an exceptional dining experience.</p>
+          <h1 class="mb-4 text-uppercase" style="color:white"><b>Make a Food Order</b></h1>
+          <p class="text-light">Order your food now and enjoy an exceptional dining experience.</p>
         </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-md-6 d-flex justify-content-center align-items-center">
           <button class="btn btn-lg btn-primary reservation-btn py-3 px-5 ftco-animate fadeInUp"
-            onclick="checkLoginAndReserve()">
-            <i class="fas fa-concierge-bell mr-2"></i> Reserve Your Table
+            onclick="checkLoginAndOrderFood()">
+            <i class="fas fa-concierge-bell mr-2"></i> Pre Order Your Food
           </button>
         </div>
       </div>
@@ -103,6 +103,20 @@ session_start();
       <?php else: ?>
         // If user is logged in, redirect to table-reservation.php
         window.location.href = 'table-reservation.php';
+      <?php endif; ?>
+    }
+  </script>
+
+   <!-- Custom Script for checking login and routing -->
+   <script>
+    function checkLoginAndOrderFood() {
+      // Use AJAX to check if user is logged in
+      <?php if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE): ?>
+        // If user is not logged in, redirect to login page
+        window.location.href = 'login.php';
+      <?php else: ?>
+        
+        window.location.href = 'food-order.php';
       <?php endif; ?>
     }
   </script>

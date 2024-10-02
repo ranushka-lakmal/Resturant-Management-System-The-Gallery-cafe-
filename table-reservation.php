@@ -29,7 +29,7 @@ if (($_SESSION['user_role'] === 'admin') && ($_SESSION['user_role'] === 'staff')
     exit();
 }
 
-echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
+//echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 // Close the database connection
 $con->close();
 ?>

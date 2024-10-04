@@ -20,14 +20,7 @@ $result = $con->query($sql);
 $user_name = $_SESSION['username'];
 $user_email = $_SESSION['email'];
 $user_phone = $_SESSION['phone'];
-$user_role = $_SESSION['user_role'];
 
-
-if (($_SESSION['user_role'] === 'admin') && ($_SESSION['user_role'] === 'staff')) {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
-}
 
 //echo '<pre>' . print_r($_SESSION, TRUE) . '</pre>';
 // Close the database connection
@@ -160,7 +153,7 @@ $con->close();
         </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
+    <?php include 'template/img.php'; ?>
     <?php include 'template/footer.php'; ?>
     <?php include 'template/script.php'; ?>
 

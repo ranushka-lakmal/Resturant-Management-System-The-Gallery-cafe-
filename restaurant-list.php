@@ -119,7 +119,7 @@ if (isset($_POST['find'])) {
       </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
+    <?php include 'template/img.php'; ?>
 
     <?php include 'template/footer.php'; ?>
     

@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 // Check if the user is logged in
 if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE) {
     echo '<script>alert("You must be logged in to order food."); window.location.href="login.php";</script>';
@@ -29,6 +25,14 @@ $result = $con->query($sql);
 $user_name = $_SESSION['username'];
 $user_email = $_SESSION['email'];
 $user_phone = $_SESSION['phone'];
+$_SESSION['user_role'] = 'user'; 
+
+if ($_SESSION['user_role'] !== 'user') {
+    echo '<script>window.location="login.php";</script>';
+	session_destroy();
+    exit();
+}
+
 
 
 ?>
@@ -241,7 +245,7 @@ $user_phone = $_SESSION['phone'];
 
 
 
-    <?php include 'template/instagram.php'; ?>
+    <?php include 'template/img.php'; ?>
     <?php include 'template/footer.php'; ?>
     <?php include 'template/script.php'; ?>
 

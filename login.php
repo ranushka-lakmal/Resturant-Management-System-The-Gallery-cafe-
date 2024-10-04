@@ -128,7 +128,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['phone'] = $user['phone'];
-                $_SESSION['role'] = $user['role'];
+                $_SESSION['role'] = $user['user'];
                 $_SESSION['user_role'] = 'user'; 
                 $_SESSION['address'] = $user['address'];
                 $_SESSION['gender'] = $user['gender'];

@@ -1,12 +1,8 @@
-<?php include 'template/header.php'; 
+<?php include 'main/header.php'; 
 if (!isset($_SESSION['isLoggedIn'])) {
 	echo '<script>window.location="login.php"</script>';
 }
-if ($_SESSION['role'] !== 'admin') {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
-}
+
 ?>
 <body>
 	<style>
@@ -56,12 +52,12 @@ if ($_SESSION['role'] !== 'admin') {
 	<section class="body">
 
 		<!-- start: header -->
-		<?php include 'template/top-bar.php'; ?>
+		<?php include 'main/top-bar.php'; ?>
 		<!-- end: header -->
 
 		<div class="inner-wrapper">
 			<!-- start: sidebar -->
-			<?php include 'template/left-bar.php'; ?>
+			<?php include 'main/left-bar.php'; ?>
 			<!-- end: sidebar -->
 
 			<section role="main" class="content-body">
@@ -170,7 +166,7 @@ if ($_SESSION['role'] !== 'admin') {
 			</section>
 		</div>
 
-		<?php include 'template/right-bar.php'; ?>
+		<?php include 'main/right-bar.php'; ?>
 	</section>
 
 	<!-- Vendor -->

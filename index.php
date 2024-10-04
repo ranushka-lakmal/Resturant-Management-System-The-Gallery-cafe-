@@ -1,7 +1,7 @@
 <!-- index.php -->
 
 <?php
-include 'template/header.php';
+include 'main/header.php';
 include 'dbCon.php'; // Include the database connection here
 $con = connect();
 session_start();
@@ -11,7 +11,7 @@ session_start();
 
 <body>
 
-  <?php include 'template/nav-bar.php'; ?>
+  <?php include 'main/nav-bar.php'; ?>
   <!-- END nav -->
 
   <section class="home-slider owl-carousel">
@@ -34,7 +34,7 @@ session_start();
   </section>
   <!-- END slider -->
 
-  <?php include 'template/font-menu.php'; ?>
+  <?php include 'main/font-menu.php'; ?>
 
   
   <!-- Reservation Section -->
@@ -125,12 +125,12 @@ session_start();
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 
-  <?php include 'template/instagram.php'; ?>
+  <?php include 'main/instagram.php'; ?>
 
-  <?php include 'template/footer.php'; ?>
+  <?php include 'main/footer.php'; ?>
 
 
-  <?php include 'template/script.php'; ?>
+  <?php include 'main/script.php'; ?>
 
   <script src="dashboard/assets/vendor/jquery/jquery.js"></script>
   <script src="dashboard/assets/vendor/select2/select2.js"></script>

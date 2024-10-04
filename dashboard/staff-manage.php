@@ -1,20 +1,16 @@
-<?php include 'template/header.php'; 
+<?php include 'main/header.php'; 
 session_start();
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
 }
 
-if ($_SESSION['role'] !== 'admin') {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
-}
+
 ?>
 <body>
     <section class="body">
-        <?php include 'template/top-bar.php'; ?>
+        <?php include 'main/top-bar.php'; ?>
         <div class="inner-wrapper">
-            <?php include 'template/left-bar.php'; ?>
+            <?php include 'main/left-bar.php'; ?>
             <section role="main" class="content-body">
                 <header class="page-header">
                     <h2>Staff List</h2>

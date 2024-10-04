@@ -1,7 +1,7 @@
-<?php include 'template/header.php'; ?>
+<?php include 'main/header.php'; ?>
   <body>
     
-    <?php include 'template/nav-bar.php'; ?>
+    <?php include 'main/nav-bar.php'; ?>
     
     <section class="home-slider owl-carousel" style="height: 400px;">
       <div class="slider-item" style="background-image: url('images/user-register.jpg');" data-stellar-background-ratio="0.5">
@@ -90,9 +90,9 @@
       </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
-    <?php include 'template/footer.php'; ?>
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/instagram.php'; ?>
+    <?php include 'main/footer.php'; ?>
+    <?php include 'main/script.php'; ?>
     
   </body>
 </html>

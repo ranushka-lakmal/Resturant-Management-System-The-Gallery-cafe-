@@ -9,12 +9,12 @@ if (isset($_POST['reservation'])) {
   $reservation_date = $_POST['reservation_date'];
   $reservation_time = $_POST['reservation_time'];
 
-include 'template/header.php'; ?>
+include 'main/header.php'; ?>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
   <body style="background-image:url('images/squares.png')">
 
-   <?php include 'template/nav-bar.php'; ?>
+   <?php include 'main/nav-bar.php'; ?>
     <!-- END nav -->
 
     <section class="home-slider owl-carousel" style="height: 400px;">

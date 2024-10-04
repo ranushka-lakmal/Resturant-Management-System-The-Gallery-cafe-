@@ -1,5 +1,5 @@
 <!-- menu-list.php -->
-<?php include 'template/header.php'; 
+<?php include 'main/header.php'; 
 if (!isset($_SESSION['isLoggedIn'])) {
 	echo '<script>window.location="login.php"</script>';
 }
@@ -9,12 +9,12 @@ if (!isset($_SESSION['isLoggedIn'])) {
 		<section class="body">
 
 			<!-- start: header -->
-			<?php include 'template/top-bar.php'; ?>
+			<?php include 'main/top-bar.php'; ?>
 			<!-- end: header -->
 
 			<div class="inner-wrapper">
 				<!-- start: sidebar -->
-				<?php include 'template/left-bar.php'; ?>
+				<?php include 'main/left-bar.php'; ?>
 				<!-- end: sidebar -->
 
 				<section role="main" class="content-body">
@@ -98,7 +98,7 @@ if (!isset($_SESSION['isLoggedIn'])) {
 				</section>
 			</div>
 
-			<?php include 'template/right-bar.php'; ?>
+			<?php include 'main/right-bar.php'; ?>
 		</section>
 		<script type="text/javascript">
 	       function Done(){

@@ -1,5 +1,5 @@
 <?php
-include 'template/header.php'; 
+include 'main/header.php'; 
 
 // Redirect if not logged in
 if (!isset($_SESSION['isLoggedIn'])) {
@@ -7,11 +7,7 @@ if (!isset($_SESSION['isLoggedIn'])) {
     exit();
 }
 
-if ($_SESSION['role'] !== 'admin') {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
-}
+
 
 // Include DB connection
 include 'dbCon.php';
@@ -59,12 +55,12 @@ if (isset($_POST['save'])) {
 
 <body>
     <!-- start: header -->
-    <?php include 'template/top-bar.php'; ?>
+    <?php include 'main/top-bar.php'; ?>
     <!-- end: header -->
 
     <div class="inner-wrapper">
         <!-- start: sidebar -->
-        <?php include 'template/left-bar.php'; ?>
+        <?php include 'main/left-bar.php'; ?>
         <!-- end: sidebar -->
 
         <section role="main" class="content-body">
@@ -159,8 +155,8 @@ if (isset($_POST['save'])) {
         </section>
     </div>
 
-    <?php include 'template/right-bar.php'; ?>
-    <?php include 'template/script-res.php'; ?>
+    <?php include 'main/right-bar.php'; ?>
+    <?php include 'main/script-res.php'; ?>
 </body>
 </html>
 

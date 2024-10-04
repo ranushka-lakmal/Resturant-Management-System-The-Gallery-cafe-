@@ -1,13 +1,9 @@
 <?php
-include 'template/header.php';
+session_start(); 
+
+include 'main/header.php';
 if (!isset($_SESSION['isLoggedIn'])) {
 	echo '<script>window.location="login.php"</script>';
-}
-
-if ($_SESSION['role'] !== 'admin') {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
 }
 
 include 'dbCon.php';
@@ -178,12 +174,12 @@ $pending_staff_count = $pending_staff_count_result->fetch_assoc()['pending_staff
 	<section class="body">
 
 		<!-- Start: header -->
-		<?php include 'template/top-bar.php'; ?>
+		<?php include 'main/top-bar.php'; ?>
 		<!-- End: header -->
 
 		<div class="inner-wrapper">
 			<!-- Start: sidebar -->
-			<?php include 'template/left-bar.php'; ?>
+			<?php include 'main/left-bar.php'; ?>
 			<!-- End: sidebar -->
 
 			<section role="main" class="content-body">
@@ -252,10 +248,10 @@ $pending_staff_count = $pending_staff_count_result->fetch_assoc()['pending_staff
 			</section>
 		</div>
 
-		<?php include 'template/right-bar.php'; ?>
+		<?php include 'main/right-bar.php'; ?>
 	</section>
 
-	<?php include 'template/script-res.php'; ?>
+	<?php include 'main/script-res.php'; ?>
 </body>
 
 </html>

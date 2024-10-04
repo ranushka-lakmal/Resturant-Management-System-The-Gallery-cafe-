@@ -23,13 +23,13 @@
 		closeOnContentClick: true,
 		closeBtnInside: false,
 		fixedContentPos: true,
-		mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+		mainClass: 'mfp-no-margins mfp-with-zoom',
 		image: {
 			verticalFit: true
 		},
 		zoom: {
 			enabled: true,
-			duration: 300 // don't foget to change the duration also in CSS
+			duration: 300 
 		}
 	});
 
@@ -134,8 +134,7 @@
 		preloader: false,
 		focus: '#name',
 
-		// When elemened is focused, some mobile browsers in some cases zoom in
-		// It looks not nice, so we disable it:
+
 		callbacks: {
 			beforeOpen: function() {
 				if($(window).width() < 700) {

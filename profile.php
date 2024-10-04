@@ -31,11 +31,11 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $reservation_result = $stmt->get_result();
 
-include 'template/header.php'; 
+include 'main/header.php'; 
 ?>
 
 <body>
-    <?php include 'template/nav-bar.php'; ?>
+    <?php include 'main/nav-bar.php'; ?>
 
     <!-- Section for the user profile -->
     <section class="home-slider owl-carousel" style="height: 400px;">
@@ -167,8 +167,8 @@ include 'template/header.php';
         </div>
     </section>
 
-    <?php include 'template/footer.php'; ?>
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/footer.php'; ?>
+    <?php include 'main/script.php'; ?>
 
     <style>
         .profile-card {

@@ -1,18 +1,12 @@
 <?php
-include 'template/header.php';
+include 'main/header.php';
 
-// Check if the user is logged in
+
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
 }
 
-if ($_SESSION['role'] !== 'admin') {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
-}
 
-// Ensure the session variable for user identity is set properly
 $approvedBy = isset($_SESSION['email']) ? $_SESSION['email'] : "Unknown";  // Use 'Unknown' if not set
 
 // Handle approval or rejection
@@ -55,12 +49,12 @@ if (isset($_GET['breject_id'])) {
     <section class="body">
 
         <!-- start: header -->
-        <?php include 'template/top-bar.php'; ?>
+        <?php include 'main/top-bar.php'; ?>
         <!-- end: header -->
 
         <div class="inner-wrapper">
             <!-- start: sidebar -->
-            <?php include 'template/left-bar.php'; ?>
+            <?php include 'main/left-bar.php'; ?>
             <!-- end: sidebar -->
 
             <section role="main" class="content-body">
@@ -160,7 +154,7 @@ if (isset($_GET['breject_id'])) {
                 <!-- end: page -->
         </div>
 
-        <?php include 'template/right-bar.php'; ?>
+        <?php include 'main/right-bar.php'; ?>
         </div>
 
     </section>
@@ -171,7 +165,7 @@ if (isset($_GET['breject_id'])) {
         }
     </script>
 
-    <?php include 'template/script-res.php'; ?>
+    <?php include 'main/script-res.php'; ?>
 </body>
 
 </html>

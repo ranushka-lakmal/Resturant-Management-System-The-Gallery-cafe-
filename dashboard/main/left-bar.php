@@ -1,9 +1,7 @@
 <aside id="sidebar-left" class="sidebar-left">
 				
 	<div class="sidebar-header">
-		<div class="sidebar-title">
-			Navigation
-		</div>
+		
 		<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
 			<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
 		</div>
@@ -138,6 +136,26 @@
 						</ul>
 					</li>
 					<?php } ?> 
+
+
+					<?php if((isset($_SESSION['isLoggedIn']) )){ ?>
+					<li class="nav-parent">
+						<a>
+							<i class="glyphicon glyphicon-envelope" aria-hidden="true"></i>
+							<span>Message</span>
+						</a>
+						<ul class="nav nav-children">
+							<li>
+								<a href="message.php">
+									<span class="pull-right label label-info">list</span>
+									<i class="fa fa-envelope" aria-hidden="true"></i>
+									<span>Message View</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<?php } ?> 
+					
 
 				</ul>
 			</nav>

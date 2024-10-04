@@ -132,6 +132,7 @@ if (isset($_POST['login_admin'])) {
 		$_SESSION['id'] = $admin['id'];
 		$_SESSION['email'] = $admin['email'];
 		$_SESSION['user_name'] = $admin['name'];
+		$_SESSION['role'] = $admin['role'];
 		$_SESSION['user_role'] = 'admin'; 
 		echo '<script>window.location="index.php"</script>';
 	} else {

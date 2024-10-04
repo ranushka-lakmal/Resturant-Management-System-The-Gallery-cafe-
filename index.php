@@ -10,19 +10,6 @@ session_start();
 
 
 <body>
-  <style>
-    /* Add custom styles for the map */
-    #map {
-            height: 400px; /* Adjust the height as needed */
-            border-radius: 8px; /* Add rounded corners for aesthetics */
-            overflow: hidden; /* Prevent overflow */
-        }
-
-        /* Optional: Style the container for better spacing */
-        .map-container {
-            margin: 20px 0; /* Add margin around the map */
-        }
-  </style>
 
   <?php include 'template/nav-bar.php'; ?>
   <!-- END nav -->
@@ -96,6 +83,7 @@ session_start();
   </section>
 
 
+
   <!-- Custom Script to Scroll to Reservation Form -->
   <script>
     function scrollToReservationForm() {
@@ -137,12 +125,7 @@ session_start();
   <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
 
-  <?php include 'template/img.php'; ?>
-
-
-    <!-- Optional: jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <?php include 'template/instagram.php'; ?>
 
   <?php include 'template/footer.php'; ?>
 

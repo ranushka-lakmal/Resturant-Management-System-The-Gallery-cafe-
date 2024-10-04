@@ -218,7 +218,7 @@ $user_email = $_SESSION['email'];
         </div>
     </section>
 
-    <?php include 'template/img.php'; ?>
+    <?php include 'template/instagram.php'; ?>
     <?php include 'template/footer.php'; ?>
     <?php include 'template/script.php'; ?>
 

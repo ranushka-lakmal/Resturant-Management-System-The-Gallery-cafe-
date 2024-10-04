@@ -1,38 +1,34 @@
 <?php
 session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE) {
-    echo '<script>alert("You must be logged in to order food."); window.location.href="login.php";</script>';
-    exit();
-}
 
 // Database connection
 include 'dbCon.php';
 $con = connect();
 
+
+if ($_SESSION['role'] == 'admin') {
+    echo '<script>window.location="login.php";</script>';
+
+}
 // Handle search
 $search = '';
 if (isset($_POST['search'])) {
     $search = $_POST['search'];
 }
 
+
 // Fetch all food items from the menu_item table, filtered by search
 $sql = "SELECT * FROM `menu_item` WHERE `item_name` LIKE '%$search%' ORDER BY FIELD(food_type, 'Main Cuisine', 'Dessert', 'Drink')";
 $result = $con->query($sql);
 
 // Fetch user details from the session
-$user_name = $_SESSION['username'];
-$user_email = $_SESSION['email'];
-$user_phone = $_SESSION['phone'];
-$_SESSION['user_role'] = 'user'; 
-
-if ($_SESSION['user_role'] !== 'user') {
-    echo '<script>window.location="login.php";</script>';
-	session_destroy();
-    exit();
-}
-
+// $user_name = $_SESSION['username'];
+// $user_email = $_SESSION['email'];
+// $user_phone = $_SESSION['phone'];
+// echo "<h3> PHP List All Session Variables</h3>";
+// foreach ($_SESSION as $key=>$val)
+// echo $key." ".$val."<br/>"; 
 
 
 ?>
@@ -42,7 +38,7 @@ if ($_SESSION['user_role'] !== 'user') {
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         .menu-item-card {
@@ -245,7 +241,7 @@ if ($_SESSION['user_role'] !== 'user') {
 
 
 
-    <?php include 'template/img.php'; ?>
+    <?php include 'template/instagram.php'; ?>
     <?php include 'template/footer.php'; ?>
     <?php include 'template/script.php'; ?>
 

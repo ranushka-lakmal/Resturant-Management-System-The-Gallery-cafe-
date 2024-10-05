@@ -1,5 +1,5 @@
 <?php 
-include 'template/header.php'; 
+include 'main/header.php'; 
 session_start();
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
@@ -24,9 +24,9 @@ if (!$staff) {
 ?>
 <body>
     <section class="body">
-        <?php include 'template/top-bar.php'; ?>
+        <?php include 'main/top-bar.php'; ?>
         <div class="inner-wrapper">
-            <?php include 'template/left-bar.php'; ?>
+            <?php include 'main/left-bar.php'; ?>
             <section role="main" class="content-body">
                 <header class="page-header">
                     <h2>Edit Staff</h2>

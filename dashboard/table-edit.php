@@ -1,5 +1,5 @@
 <?php
-include 'template/header.php';
+include 'main/header.php';
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
 }
@@ -49,12 +49,12 @@ $con->close(); // Close the database connection
 <body>
     <section class="body">
         <!-- start: header -->
-        <?php include 'template/top-bar.php'; ?>
+        <?php include 'main/top-bar.php'; ?>
         <!-- end: header -->
 
         <div class="inner-wrapper">
             <!-- start: sidebar -->
-            <?php include 'template/left-bar.php'; ?>
+            <?php include 'main/left-bar.php'; ?>
             <!-- end: sidebar -->
 
             <section role="main" class="content-body">
@@ -114,7 +114,7 @@ $con->close(); // Close the database connection
             </section>
         </div>
 
-        <?php include 'template/right-bar.php'; ?>
+        <?php include 'main/right-bar.php'; ?>
     </section>
 
     <!-- Vendor -->

@@ -27,7 +27,7 @@ $user_email = $_SESSION['email'];
 
 ?>
 
-<?php include 'template/header.php'; ?>
+<?php include 'main/header.php'; ?>
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
@@ -99,7 +99,7 @@ $user_email = $_SESSION['email'];
 </head>
 
 <body>
-    <?php include 'template/nav-bar.php'; ?>
+    <?php include 'main/nav-bar.php'; ?>
 
     <section class="home-slider owl-carousel" style="height: 400px;">
         <div class="slider-item" style="background-image: url('images/order1.jpg');" data-stellar-background-ratio="0.5">
@@ -218,9 +218,9 @@ $user_email = $_SESSION['email'];
         </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
-    <?php include 'template/footer.php'; ?>
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/instagram.php'; ?>
+    <?php include 'main/footer.php'; ?>
+    <?php include 'main/script.php'; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>

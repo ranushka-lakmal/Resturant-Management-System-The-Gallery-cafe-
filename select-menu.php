@@ -10,12 +10,12 @@ if (isset($_POST['selectChair'])) {
   $table = $_POST["table"];
   $chair = $_POST["chair"];
 
-include 'template/header.php'; ?>
+include 'main/header.php'; ?>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <body>
     
-     <?php include 'template/nav-bar.php'; ?>
+     <?php include 'main/nav-bar.php'; ?>
     <!-- END nav -->
     
     <section class="home-slider owl-carousel" style="height: 400px;">
@@ -205,11 +205,11 @@ include 'template/header.php'; ?>
     </section>
     </form>
 
-    <?php include 'template/instagram.php'; ?>
+    <?php include 'main/instagram.php'; ?>
 
-    <?php include 'template/footer.php'; ?>
+    <?php include 'main/footer.php'; ?>
     
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/script.php'; ?>
     
   </body>
 </html>

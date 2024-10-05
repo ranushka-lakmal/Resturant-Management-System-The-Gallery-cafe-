@@ -117,11 +117,11 @@ include 'main/header.php'; ?>
       </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
+    <?php include 'main/instagram.php'; ?>
 
-    <?php include 'template/footer.php'; ?>
+    <?php include 'main/footer.php'; ?>
 
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/script.php'; ?>
 
   </body>
 </html>

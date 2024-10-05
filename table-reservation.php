@@ -33,16 +33,17 @@ if ($_SESSION['role'] == 'admin') {
 $con->close();
 ?>
 
-<?php include 'template/header.php'; ?>
+<?php include 'main/header.php'; ?>
 
 <head>
     <!-- Other head elements -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
 </head>
 
 <body>
-    <?php include 'template/nav-bar.php'; ?>
+    <?php include 'main/nav-bar.php'; ?>
 
     <section class="home-slider owl-carousel" style="height: 400px;">
         <div class="slider-item" style="background-image: url('images/table-res.jpg');"
@@ -159,9 +160,9 @@ $con->close();
         </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
-    <?php include 'template/footer.php'; ?>
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/instagram.php'; ?>
+    <?php include 'main/footer.php'; ?>
+    <?php include 'main/script.php'; ?>
 
     <script>
         function selectTable(tableElement) {

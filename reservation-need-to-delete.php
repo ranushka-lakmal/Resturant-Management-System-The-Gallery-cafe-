@@ -1,5 +1,5 @@
 <!-- reservation.php -->
-<?php include 'template/header.php';
+<?php include 'main/header.php';
 
                         include 'dbCon.php';
 if (!isset($_SESSION['isLoggedIn'])) {
@@ -11,7 +11,7 @@ if (!isset($_SESSION['isLoggedIn'])) {
 
   <body>
     
-   <?php include 'template/nav-bar.php'; ?>
+   <?php include 'main/nav-bar.php'; ?>
     <!-- END nav -->
     
     <section class="home-slider owl-carousel"  >
@@ -134,11 +134,11 @@ if (!isset($_SESSION['isLoggedIn'])) {
       </div>
     </section>
 
-    <?php include 'template/instagram.php'; ?>
+    <?php include 'main/instagram.php'; ?>
 
-    <?php include 'template/footer.php'; ?>
+    <?php include 'main/footer.php'; ?>
     
-    <?php include 'template/script.php'; ?>
+    <?php include 'main/script.php'; ?>
 
 
   </body>

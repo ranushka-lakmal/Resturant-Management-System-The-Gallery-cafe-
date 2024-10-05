@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 02, 2024 at 02:46 PM
+-- Generation Time: Oct 05, 2024 at 10:56 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,60 +40,6 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `email`, `password`, `role`) VALUES
 (1, 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'admin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `booking_details`
---
-
-CREATE TABLE `booking_details` (
-  `id` int(11) NOT NULL,
-  `booking_id` varchar(200) DEFAULT NULL,
-  `res_id` int(11) DEFAULT NULL,
-  `c_id` int(11) DEFAULT NULL,
-  `make_date` date DEFAULT NULL,
-  `make_time` varchar(50) DEFAULT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `phone` varchar(100) DEFAULT NULL,
-  `booking_date` date DEFAULT NULL,
-  `booking_time` varchar(30) DEFAULT NULL,
-  `bill` float DEFAULT NULL,
-  `transactionid` varchar(100) DEFAULT NULL,
-  `status` int(11) NOT NULL DEFAULT 0 COMMENT '0- reject, 1-confirmed',
-  `reject` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `booking_details`
---
-
-INSERT INTO `booking_details` (`id`, `booking_id`, `res_id`, `c_id`, `make_date`, `make_time`, `name`, `phone`, `booking_date`, `booking_time`, `bill`, `transactionid`, `status`, `reject`) VALUES
-(2, '66e733223e663', 12, 12, '2024-09-16', '01:18:58am', 'et', '0702214136', '2024-09-26', '10:00am', 1500, '123456', 1, 0),
-(3, '66edba9bd5542', 14, 4, '2024-09-21', '12:10:35am', 'Park View Restaurant', '01821356478', '2024-09-26', '10:00am', 9000, '123456', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `booking_menus`
---
-
-CREATE TABLE `booking_menus` (
-  `id` int(11) NOT NULL,
-  `booking_id` varchar(200) DEFAULT NULL,
-  `item_id` int(11) DEFAULT NULL,
-  `qty` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
-
---
--- Dumping data for table `booking_menus`
---
-
-INSERT INTO `booking_menus` (`id`, `booking_id`, `item_id`, `qty`) VALUES
-(1, '5ccbd8f5609b3', 4, 2),
-(2, '5ccbd8f5609b3', 5, 2),
-(3, '66e733223e663', 10, 1),
-(4, '66edba9bd5542', 14, 6);
 
 -- --------------------------------------------------------
 
@@ -160,20 +106,32 @@ INSERT INTO `menu_item` (`id`, `res_id`, `item_name`, `madeby`, `food_type`, `cu
 
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `user_name` varchar(100) NOT NULL,
-  `user_email` varchar(100) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `admin_id` int(11) DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_email` varchar(255) NOT NULL,
   `message` text NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `send_to` varchar(255) DEFAULT NULL,
+  `user_del_status` int(11) NOT NULL DEFAULT 0,
+  `is_read` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`id`, `user_id`, `user_name`, `user_email`, `message`, `created_at`) VALUES
-(1, 15, 'test', 'my@gmail.com', 'aaaa', '2024-09-28 22:27:23'),
-(2, 15, 'test', 'my@gmail.com', 'testttt', '2024-09-29 00:14:42');
+INSERT INTO `messages` (`id`, `user_id`, `admin_id`, `user_name`, `user_email`, `message`, `created_at`, `send_to`, `user_del_status`, `is_read`) VALUES
+(1, 15, NULL, 'test', 'my@gmail.com', 'test', '2024-10-04 15:39:53', NULL, 9, 0),
+(2, NULL, NULL, 'admin', 'my@gmail.com', 'uu', '2024-10-04 15:41:04', NULL, 0, 0),
+(4, NULL, 1, 'admin', 'admin@gmail.com', 'ss', '2024-10-04 15:44:46', NULL, 9, 0),
+(8, 15, NULL, 'test', 'my@gmail.com', 'oi', '2024-10-04 15:50:08', NULL, 9, 0),
+(10, NULL, 1, 'admin', 'admin@gmail.com', 'ii', '2024-10-04 15:51:32', NULL, 9, 0),
+(11, NULL, 1, 'admin', 'admin@gmail.com', 'ii', '2024-10-04 15:52:10', NULL, 9, 0),
+(12, NULL, 1, 'admin', 'admin@gmail.com', 'ok', '2024-10-04 15:54:05', NULL, 9, 0),
+(16, NULL, 1, 'admin', 'admin@gmail.com', 'oo', '2024-10-04 16:34:11', NULL, 1, 0),
+(17, NULL, 1, 'admin', 'admin@gmail.com', 'rr', '2024-10-04 16:36:31', 'my@gmail.com', 9, 0),
+(24, NULL, 1, 'admin', 'admin@gmail.com', 'ok', '2024-10-04 17:14:16', 'my@gmail.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -199,7 +157,7 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `table_id`, `name`, `email`, `phone`, `guests`, `date`, `time`, `status`, `approvedBy`) VALUES
-(1, 22, 'test', 'my@gmail.com', '011111111', 10, '2024-09-30', '22:11:00', 1, 'admin@gmail.com'),
+(1, 22, 'test', 'my@gmail.com', '011111111', 10, '2024-09-30', '22:11:00', 1, 'test@gmail.com'),
 (2, 19, 'test', 'my@gmail.com', '011111111', 2, '2024-09-26', '06:30:00', 1, 'test@gmail.com');
 
 -- --------------------------------------------------------
@@ -280,11 +238,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `gender`, `password`, `created_at`, `status`, `role`) VALUES
-(9, 'user1', 'user1@gmail.com', '0776531846', 'colombo', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-20 17:40:02', 9, 'user'),
-(10, 'test12', 'tt@gmail.com', '077652617', 'oop', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-21 11:46:58', 9, 'user'),
-(12, 'ttff', 'ttff@gmail.com', '1111111111', 'kk', 'Female', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-21 13:06:35', 9, 'user'),
-(13, 'tt', 'te@gmail.com', '2222222222', 'hsh', 'Male', '827ccb0eea8a706c4c34a16891f84e7b', '2024-09-22 20:56:54', 9, 'user'),
-(14, 'test', 'aa@gmail.com', '1111111111', 'nisns', 'Male', 'fcea920f7412b5da7be0cf42b8c93759', '2024-09-22 21:17:55', 9, 'user'),
+(9, 'user1', 'user1@gmail.com', '0776531846', 'colombo', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-20 17:40:02', 1, 'user'),
+(10, 'test12', 'tt@gmail.com', '077652617', 'oop', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-21 11:46:58', 1, 'user'),
+(12, 'ttff', 'ttff@gmail.com', '1111111111', 'kk', 'Female', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-21 13:06:35', 1, 'user'),
+(13, 'tt', 'te@gmail.com', '2222222222', 'hsh', 'Male', '827ccb0eea8a706c4c34a16891f84e7b', '2024-09-22 20:56:54', 1, 'user'),
+(14, 'test', 'aa@gmail.com', '1111111111', 'nisns', 'Male', 'fcea920f7412b5da7be0cf42b8c93759', '2024-09-22 21:17:55', 1, 'user'),
 (15, 'test', 'my@gmail.com', '011111111', 'Kaduwela', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-26 18:25:49', 1, 'user'),
 (16, 'Ran', 'ran@gmail.com', '0118282882', 'colombo', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-26 19:18:24', 1, 'user');
 
@@ -298,18 +256,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `gender`, `p
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `booking_details`
---
-ALTER TABLE `booking_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `booking_menus`
---
-ALTER TABLE `booking_menus`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `foodOrder`
@@ -328,7 +274,8 @@ ALTER TABLE `menu_item`
 --
 ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `fk_user` (`user_id`),
+  ADD KEY `fk_admin` (`admin_id`);
 
 --
 -- Indexes for table `reservations`
@@ -367,18 +314,6 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `booking_details`
---
-ALTER TABLE `booking_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `booking_menus`
---
-ALTER TABLE `booking_menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `foodOrder`
 --
 ALTER TABLE `foodOrder`
@@ -394,7 +329,7 @@ ALTER TABLE `menu_item`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `reservations`
@@ -428,7 +363,8 @@ ALTER TABLE `users`
 -- Constraints for table `messages`
 --
 ALTER TABLE `messages`
-  ADD CONSTRAINT `messages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `fk_admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `reservations`

@@ -1,25 +1,21 @@
 <?php
 session_start();
+include 'dbCon.php';
+$con = connect();
 
-// Check if the user is logged in
-if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE) {
+// Check if user is logged in and email session variable is set
+if (!isset($_SESSION['isLoggedIn']) || $_SESSION['isLoggedIn'] !== TRUE || !isset($_SESSION['email'])) {
     echo '<script>alert("You must be logged in to view your profile."); window.location.href="login.php";</script>';
     exit();
 }
 
-// Fetch user details from the session
 $user_name = $_SESSION['username'];
 $user_email = $_SESSION['email'];
 $user_phone = $_SESSION['phone'];
-$user_gender = $_SESSION['gender']; 
-$user_address = $_SESSION['address']; 
+$user_gender = $_SESSION['gender'];
+$user_address = $_SESSION['address'];
 
-// Database connection
-include 'dbCon.php';
-$con = connect();
-
-// Fetch user's reservations and the corresponding table names
-$user_id = $_SESSION['email'];
+// Prepare query to fetch reservations linked to the logged-in user's email
 $sql_reservations = "
     SELECT r.*, t.table_name 
     FROM reservations r 
@@ -27,27 +23,28 @@ $sql_reservations = "
     WHERE r.email = ?
 ";
 $stmt = $con->prepare($sql_reservations);
-$stmt->bind_param("i", $user_id);
+
+if ($stmt === false) {
+    die("Error preparing statement: " . $con->error);
+}
+
+$stmt->bind_param("s", $user_email); 
 $stmt->execute();
 $reservation_result = $stmt->get_result();
 
-include 'main/header.php'; 
+include 'main/header.php';
 ?>
 
 <body>
     <?php include 'main/nav-bar.php'; ?>
 
-    <!-- Section for the user profile -->
     <section class="home-slider owl-carousel" style="height: 400px;">
         <div class="slider-item" style="background-image: url('images/profile.jpg');" data-stellar-background-ratio="0.5">
             <div class="overlay"></div>
             <div class="container">
                 <div class="row slider-text align-items-center justify-content-center">
                     <div class="col-md-10 col-sm-12 ftco-animate text-center" style="padding-bottom: 25%;">
-                        <p class="breadcrumbs">
-                            <span class="mr-2"><a href="index.php">Home</a></span> 
-                            <span>Profile</span>
-                        </p>
+                        <p class="breadcrumbs"><span class="mr-2"><a href="index.php">Home</a></span> <span>Profile</span></p>
                         <h1 class="mb-3">Your Profile</h1>
                     </div>
                 </div>
@@ -84,7 +81,6 @@ include 'main/header.php';
                                 <input type="text" id="phone" class="form-control" value="<?php echo htmlspecialchars($user_phone); ?>" readonly>
                             </div>
 
-                       
                             <div class="form-group">
                                 <label for="gender">Gender:</label>
                                 <input type="text" id="gender" class="form-control" value="<?php echo htmlspecialchars($user_gender); ?>" readonly>
@@ -95,10 +91,9 @@ include 'main/header.php';
                                 <input type="text" id="address" class="form-control" value="<?php echo htmlspecialchars($user_address); ?>" readonly>
                             </div>
 
-                            <!-- Edit Information Button -->
-                    <div class="form-group">
-                        <a href="contact-admin.php" class="btn btn-warning py-2 px-4">Edit Information</a>
-                    </div>
+                            <div class="form-group">
+                                <a href="contact-admin.php" class="btn btn-warning py-2 px-4">Edit Information</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -106,7 +101,6 @@ include 'main/header.php';
         </div>
     </section>
 
-    <!-- Section for displaying user reservations -->
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
@@ -138,7 +132,6 @@ include 'main/header.php';
                                         <td><?php echo htmlspecialchars($reservation['time']); ?></td>
                                         <td>
                                             <?php 
-                                            // Map the status to human-readable text
                                             switch ($reservation['status']) {
                                                 case 0:
                                                     echo "Pending";

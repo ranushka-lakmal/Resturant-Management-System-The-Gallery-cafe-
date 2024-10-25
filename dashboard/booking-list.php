@@ -1,11 +1,9 @@
 <?php
 include 'main/header.php';
 
-
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
 }
-
 
 $approvedBy = isset($_SESSION['email']) ? $_SESSION['email'] : "Unknown";  // Use 'Unknown' if not set
 
@@ -18,11 +16,32 @@ if (isset($_GET['bapprove_id'])) {
     // Update the reservation status and set approvedBy field
     $sql = "UPDATE reservations SET status = 1, approvedBy = ? WHERE id = ?";
     $stmt = $con->prepare($sql);
-    
-    $stmt->bind_param("si", $approvedBy, $bookingId);  // Bind the approvedBy value and the bookingId
+    $stmt->bind_param("si", $approvedBy, $bookingId);
     $stmt->execute();
-	$stmt->close();
-	$con->close();
+
+    // Fetch the table_id from the reservation
+    $tableIdQuery = "SELECT table_id FROM reservations WHERE id = ?";
+    $stmt = $con->prepare($tableIdQuery);
+    $stmt->bind_param("i", $bookingId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $tableId = null;
+
+    if ($row = $result->fetch_assoc()) {
+        $tableId = $row['table_id']; // Get the table_id
+    }
+
+    // Update the restaurant_tables status
+    if ($tableId !== null) {
+        $updateTableStatusSql = "UPDATE restaurant_tables SET status = 1 WHERE id = ?";
+        $updateStmt = $con->prepare($updateTableStatusSql);
+        $updateStmt->bind_param("i", $tableId);
+        $updateStmt->execute();
+        $updateStmt->close();
+    }
+
+    $stmt->close();
+    $con->close();
     
     echo '<script>alert("Reservation approved successfully!"); window.location="booking-list.php";</script>';
 }
@@ -35,8 +54,7 @@ if (isset($_GET['breject_id'])) {
     // Update the reservation status and set approvedBy field
     $sql = "UPDATE reservations SET status = 9, approvedBy = ? WHERE id = ?";
     $stmt = $con->prepare($sql);
-
-    $stmt->bind_param("si", $approvedBy, $bookingId);  // Bind the approvedBy value and the bookingId
+    $stmt->bind_param("si", $approvedBy, $bookingId);
     $stmt->execute();
     $stmt->close();
     $con->close();
@@ -101,7 +119,6 @@ if (isset($_GET['breject_id'])) {
                                     <th class="hidden-phone">Status</th>
                                     <th class="hidden-phone">Approved By</th> <!-- New Column -->
                                     <th class="hidden-phone">Action</th>
-                               
                                 </tr>
                             </thead>
                             <tbody>
@@ -143,7 +160,6 @@ if (isset($_GET['breject_id'])) {
                                                 class="btn btn-danger"
                                                 onclick="return confirm('Are you sure you want to reject this reservation?');">Reject</a>
                                         </td>
-                                       
                                     </tr>
                                     <?php $count++;
                                 } ?>

@@ -1,3 +1,30 @@
+<?php
+session_start(); // Start the session
+include 'dbCon.php'; // Include the database connection file
+
+// Fetch the count of pending orders
+$order_count_query = "SELECT COUNT(*) as pending_orders FROM orders WHERE status = 0";
+$order_count_result = mysqli_query($conn, $order_count_query);
+if ($order_count_result) {
+  $order_data = mysqli_fetch_assoc($order_count_result);
+  $pending_orders = $order_data['pending_orders'];
+} else {
+  $pending_orders = 0; // Fallback value
+}
+
+$table_count_query = "SELECT COUNT(*) as pending_table FROM reservations WHERE status = 0";
+$table_count_result = mysqli_query($conn, $table_count_query);
+if ($table_count_result) {
+  $table_data = mysqli_fetch_assoc($table_count_result);
+  $pending_table = $table_data['pending_table'];
+} else {
+  $pending_table = 0; // Fallback value
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +40,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,90 +84,12 @@
 
         <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+          <a class="nav-link nav-icon" href="logout.php">
+            <i class="bi bi-box-arrow-right"></i>
+            <span class="badge bg-primary badge-number"></span>
+          </a><!-- End Logout Icon -->
 
 
-          </ul><!-- End Notification Dropdown Items -->
-
-        </li><!-- End Notification Nav -->
-
-        <li class="nav-item dropdown">
-
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria Hudson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna Nelson</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
-                <div>
-                  <h4>David Muldon</h4>
-                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
-
-          </ul><!-- End Messages Dropdown Items -->
-
-        </li><!-- End Messages Nav -->
 
 
       </ul>
@@ -174,11 +125,12 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Food Orders</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-layout-text-window-reverse"></i><span>Food Orders</span><i
+            class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-general.html">
+            <a href="food-orderList.php">
               <i class="bi bi-circle"></i><span>Manage Orders</span>
             </a>
           </li>
@@ -192,7 +144,7 @@
           <span>Profile</span>
         </a>
       </li><!-- End Profile Page Nav -->
- 
+
 
     </ul>
 
@@ -213,9 +165,54 @@
     <section class="section dashboard">
       <div class="row">
 
-  
+        <!-- Users Card -->
+        <div class="col-lg-6 col-md-10">
+  <a href="manage-reservation.php" style="text-decoration: none;">
+    <div class="card info-card users-card">
+      <div class="card-body">
+        <h5 class="card-title">Pending <span>| Table Reservation</span></h5>
+
+        <div class="d-flex align-items-center">
+          <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="ps-3">
+            <h6 style="color: inherit;">
+              <?php echo $pending_table; ?>
+            </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div><!-- End Users Card -->
+
+
+        <!-- Income Card -->
+        <div class="col-lg-6 col-md-10">
+        <a href="food-orderList.php" style="text-decoration: none;">
+        <div class="card info-card users-card">
+            <div class="card-body">
+                <h5 class="card-title">Pending <span>| Food Orders</span></h5>
+                <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="bi bi-border-style"></i>
+                    </div>
+                    <div class="ps-3">
+                        <h6>
+                            <?php echo $pending_orders; ?>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
 
       </div>
+
+
     </section>
 
   </main><!-- End #main -->
@@ -228,7 +225,8 @@
 
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

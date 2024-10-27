@@ -14,6 +14,18 @@
 		<link rel="stylesheet" href="assets/stylesheets/skins/default.css" />
 		<link rel="stylesheet" href="assets/stylesheets/theme-custom.css">
 		<!-- Custom CSS for Animation -->
+
+		<style>
+			body {
+				background-image: url('assets/images/aa.jpg'); /* Add your background image path here */
+				background-size: cover; /* This will cover the entire screen */
+				background-repeat: no-repeat;
+				background-attachment: fixed; /* This keeps the background fixed on scroll */
+				background-position: center center;
+			}
+			.fade-in { opacity: 0; animation: fadeIn ease 1s; animation-fill-mode: forwards; }
+			@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
+		</style>
 		<style>
 			.fade-in { opacity: 0; animation: fadeIn ease 1s; animation-fill-mode: forwards; }
 			@keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
@@ -25,7 +37,7 @@
 		<section class="body-sign fade-in">
 			<div class="center-sign">
 				<a href="" class="logo pull-left">
-					<img src="assets/images/newlogo.png" height="74" alt="Admin" />
+				<h2 class="title text-uppercase text-bold" style="color:white"> The Gallery Cafe</h2>
 				</a>
 
 				<div class="panel panel-sign">

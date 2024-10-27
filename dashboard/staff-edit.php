@@ -3,13 +3,32 @@ include 'main/header.php';
 session_start();
 if (!isset($_SESSION['isLoggedIn'])) {
     echo '<script>window.location="login.php"</script>';
+    exit;
 }
 
 include 'dbCon.php'; 
 $con = connect();
 
+// Function to decrypt the password
+function decryptPassword($encryptedPassword, $key) {
+    $c = base64_decode($encryptedPassword);
+    $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
+    $iv = substr($c, 0, $ivlen);
+    $hmac = substr($c, $ivlen, $sha2len = 32);
+    $ciphertext_raw = substr($c, $ivlen + $sha2len);
+    $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+    $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+    if (hash_equals($hmac, $calcmac)) {
+        return $original_plaintext;
+    }
+    return false;
+}
+
+// Encryption key - in a real scenario, this should be stored securely, not in the code
+$encryptionKey = "YourSecretKeyHere";
+
 // Fetch the staff details based on empId
-$empId = $_GET['id'];
+$empId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $sql = "SELECT * FROM `staff` WHERE empId = ?";
 $stmt = $con->prepare($sql);
 $stmt->bind_param('i', $empId);
@@ -21,7 +40,21 @@ if (!$staff) {
     echo '<script>alert("Staff not found."); window.location="staff-manage.php";</script>';
     exit;
 }
+
+// Decrypt the password
+$decryptedPassword = decryptPassword($staff['password'], $encryptionKey);
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Staff</title>
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="assets/stylesheets/theme.css">
+    <link rel="stylesheet" href="assets/stylesheets/skins/default.css">
+</head>
 <body>
     <section class="body">
         <?php include 'main/top-bar.php'; ?>
@@ -42,47 +75,58 @@ if (!$staff) {
                     </header>
                     <div class="panel-body">
                         <form action="staff-update.php" method="POST" class="form-horizontal">
-                            <input type="hidden" name="empId" value="<?php echo $staff['empId']; ?>">
+                            <input type="hidden" name="empId" value="<?php echo htmlspecialchars($staff['empId']); ?>">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">First Name</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="firstName" class="form-control" value="<?php echo $staff['firstName']; ?>" required>
+                                    <input type="text" name="firstName" class="form-control" value="<?php echo htmlspecialchars($staff['firstName']); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Last Name</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="lastName" class="form-control" value="<?php echo $staff['lastName']; ?>" required>
+                                    <input type="text" name="lastName" class="form-control" value="<?php echo htmlspecialchars($staff['lastName']); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Email</label>
                                 <div class="col-sm-6">
-                                    <input type="email" name="email" class="form-control" value="<?php echo $staff['email']; ?>" required>
+                                    <input type="email" name="email" class="form-control" value="<?php echo htmlspecialchars($staff['email']); ?>" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-6">
+                                    <div class="input-group">
+                                        <input type="password" name="password" id="password" class="form-control" value="<?php echo htmlspecialchars($decryptedPassword); ?>" required>
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-eye" id="togglePassword" style="cursor: pointer;"></i>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Mobile No</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="mobileNo" class="form-control" value="<?php echo $staff['mobileNo']; ?>" required>
+                                    <input type="text" name="mobileNo" class="form-control" value="<?php echo htmlspecialchars($staff['mobileNo']); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Job Title</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="jobTitle" class="form-control" value="<?php echo $staff['jobTitle']; ?>" required>
+                                    <input type="text" name="jobTitle" class="form-control" value="<?php echo htmlspecialchars($staff['jobTitle']); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Address</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="addr" class="form-control" value="<?php echo $staff['addr']; ?>" required>
+                                    <input type="text" name="addr" class="form-control" value="<?php echo htmlspecialchars($staff['addr']); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">Date of Birth</label>
                                 <div class="col-sm-6">
-                                    <input type="date" name="dob" class="form-control" value="<?php echo $staff['dob']; ?>" required>
+                                    <input type="date" name="dob" class="form-control" value="<?php echo htmlspecialchars($staff['dob']); ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -125,5 +169,16 @@ if (!$staff) {
     
     <!-- Theme Initialization Files -->
     <script src="assets/javascripts/theme.init.js"></script>
+
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+
+        togglePassword.addEventListener('click', function (e) {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
 </body>
 </html>

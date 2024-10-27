@@ -137,6 +137,23 @@
 					</li>
 					<?php } ?> 
 
+					<?php if((isset($_SESSION['isLoggedIn']) )){ ?>
+					<li class="nav-parent">
+						<a>
+							<i class="glyphicon glyphicon-bullhorn" aria-hidden="true"></i>
+							<span>Food Order</span>
+						</a>
+						<ul class="nav nav-children">
+							<li>
+								<a href="food-orderList.php">
+									<span class="pull-right label label-info">list</span>
+									<i class="fa fa-eye" aria-hidden="true"></i>
+									<span>Food Order</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<?php } ?> 
 
 					<?php if((isset($_SESSION['isLoggedIn']) )){ ?>
 					<li class="nav-parent">

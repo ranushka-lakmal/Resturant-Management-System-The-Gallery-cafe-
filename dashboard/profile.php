@@ -73,7 +73,7 @@ if (isset($_POST['save'])) {
                                 <i class="fa fa-home"></i>
                             </a>
                         </li>
-                        <li><span>Profile Test</span></li>
+                        <li><span>Profile</span></li>
                     </ol>
                     <a class="sidebar-right-toggle" data-open="sidebar-right"></i></a>
                 </div>

@@ -1,5 +1,3 @@
-
-Copy code
 <?php
 session_start(); // Start the session to access session variables
 
@@ -91,8 +89,14 @@ $result = $conn->query($query);
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="manage-reservation.php">
-                    <i class="bi bi-journal-text"></i><span>Manage Reservations</span>
+                <a class="nav-link " href="index.php">
+                    <i class="bi bi-journal-text"></i>
+                    <span>Table Reservation</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="food-orderList.php">
+                    <i class="bi bi-journal-text"></i><span>Food Order</span>
                 </a>
             </li>
         </ul>

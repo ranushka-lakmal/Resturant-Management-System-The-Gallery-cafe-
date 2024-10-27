@@ -36,12 +36,7 @@
 				<!-- start: search & user box -->
 				<div class="header-right">
 					
-					<span class="separator"></span>
-					<a href="#" class="notification">
-  <span>Inbox</span>
-  <span class="badge">3</span>
-</a>
-					<span class="separator"></span>
+				<span class="separator"></span>
 			
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">

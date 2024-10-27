@@ -1,4 +1,3 @@
-<!-- dbCon.php -->
 <?php 
 function connect($flag=TRUE){
 	$servername = "localhost";

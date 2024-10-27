@@ -30,12 +30,7 @@
 						</a>
 					</li>
 
-					<li class="nav-item">
-						<a href="logout.php" class="nav-link">
-						<i class="fa  fa-power-off" ></i>
-						</a>
-					</li>
-
+				
 					<li class="nav-item">
 						<a href="message.php" class="nav-link">
 
@@ -43,6 +38,26 @@
 
 						</a>
 					</li>
+
+					<li class="nav-item">
+						<a href="my-tbl-res.php" class="nav-link">
+							<i class="fa fa-calendar-plus-o"></i>
+						</a>
+					</li>
+
+
+					<li class="nav-item">
+						<a href="my-food-order.php" class="nav-link">
+							<i class="fa fa-first-order"></i>
+						</a>
+					</li>
+
+					<li class="nav-item">
+						<a href="logout.php" class="nav-link">
+						<i class="fa  fa-power-off" ></i>
+						</a>
+					</li>
+
 
 				<?php } ?>
 			</ul>

@@ -48,7 +48,7 @@ foreach ($cart['items'] as $item) {
     } else {
         // If the item does not exist, insert it as a new order
         $food_type = '';  // Set or fetch the food type if necessary
-        $insert_stmt = $con->prepare("INSERT INTO foodOrder (customer_name, customer_email, customer_phone, item_name, food_type, food_count, order_date, created_at)
+        $insert_stmt = $con->prepare("INSERT INTO food_order (customer_name, customer_email, customer_phone, item_name, food_type, food_count, order_date, created_at)
                                       VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         $insert_stmt->bind_param('sssssiis', $customer_name, $customer_email, $customer_phone, $item_name, $food_type, $quantity, $order_date, $created_at);
         

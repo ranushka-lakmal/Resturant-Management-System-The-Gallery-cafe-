@@ -13,6 +13,7 @@ $con = connect();
 
 // Get user ID from session
 $user_id = $_SESSION['id'];
+$email = $_SESSION['email'];
 
 // Fetch sent messages
 $sentMessagesQuery = "SELECT * FROM messages WHERE user_id = ? ORDER BY created_at DESC";
@@ -22,9 +23,9 @@ $sentStmt->execute();
 $sentMessages = $sentStmt->get_result();
 
 // Fetch received messages
-$receivedMessagesQuery = "SELECT * FROM messages WHERE user_id <> ? ORDER BY created_at DESC";
+$receivedMessagesQuery = "SELECT * FROM messages WHERE email <> ? ORDER BY created_at DESC";
 $receivedStmt = $con->prepare($receivedMessagesQuery);
-$receivedStmt->bind_param("i", $user_id);
+$receivedStmt->bind_param("i", $email);
 $receivedStmt->execute();
 $receivedMessages = $receivedStmt->get_result();
 

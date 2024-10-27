@@ -154,50 +154,63 @@ if (isset($_POST['login_admin'])) {
 	$con->close();
 }
 
+
 if (isset($_POST['login_staff'])) {
-	$email = $_POST['email'];
-	$password = md5($_POST['password']); // MD5 hash for staff passwords
+    $email = $_POST['email'];
+    $password = $_POST['password']; // Don't hash the password here
 
-	include 'dbCon.php';
-	$con = connect();
+    include 'dbCon.php';
+    $con = connect();
 
-	// Prepared statement for staff login
-	$stmt = $con->prepare("SELECT * FROM staff WHERE email = ?");
-	$stmt->bind_param("s", $email);
-	$stmt->execute();
-	$result = $stmt->get_result();
+    function decryptPassword($encryptedPassword, $key)
+    {
+        $c = base64_decode($encryptedPassword);
+        $ivlen = openssl_cipher_iv_length($cipher = "AES-128-CBC");
+        $iv = substr($c, 0, $ivlen);
+        $hmac = substr($c, $ivlen, $sha2len = 32);
+        $ciphertext_raw = substr($c, $ivlen + $sha2len);
+        $original_plaintext = openssl_decrypt($ciphertext_raw, $cipher, $key, $options = OPENSSL_RAW_DATA, $iv);
+        $calcmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary = true);
+        if (hash_equals($hmac, $calcmac)) {
+            return $original_plaintext;
+        }
+        return false;
+    }
+    $encryptionKey = "YourSecretKeyHere"; // Use the same key as in user login
 
-	if ($result->num_rows > 0) {
-		$staff = $result->fetch_assoc();
-		// Check if staff account is pending or deactivated
-		if ($staff['status'] == 0) {
-			echo '<script>alert("Your account is pending approval.")</script>';
-		} elseif ($staff['status'] == 9) {
-			echo '<script>alert("Your account is deactivated.")</script>';
-		} else {
-			// Check password
-			$stmtPassword = $con->prepare("SELECT * FROM staff WHERE email = ? AND password = ?");
-			$stmtPassword->bind_param("ss", $email, $password);
-			$stmtPassword->execute();
-			$resultPassword = $stmtPassword->get_result();
+    // Prepared statement for staff login
+    $stmt = $con->prepare("SELECT * FROM staff WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-			if ($resultPassword->num_rows > 0) {
-				$_SESSION['isLoggedIn'] = TRUE;
-				$_SESSION['id'] = $staff['id'];
-				$_SESSION['email'] = $staff['email'];
-				$_SESSION['user_name'] = $staff['name']; // Store staff name in session
-				$_SESSION['user_role'] = 'staff'; // Add role information for future use
-				echo '<script>window.location="./staff-dashboard/index.php"</script>';
-			} else {
-				echo '<script>alert("Incorrect Password.")</script>';
-			}
-			$stmtPassword->close();
-		}
-	} else {
-		echo '<script>alert("Email not found.")</script>';
-	}
+    if ($result->num_rows > 0) {
+        $staff = $result->fetch_assoc();
+        // Check if staff account is pending or deactivated
+        if ($staff['status'] == 0) {
+            echo '<script>alert("Your account is pending approval.")</script>';
+        } elseif ($staff['status'] == 9) {
+            echo '<script>alert("Your account is deactivated.")</script>';
+        } else {
+            // Decrypt the stored password and compare
+            $decryptedPassword = decryptPassword($staff['password'], $encryptionKey);
 
-	$stmt->close();
-	$con->close();
+            if ($decryptedPassword === false || $password !== $decryptedPassword) {
+                echo '<script>alert("Incorrect Password.")</script>';
+            } else {
+                $_SESSION['isLoggedIn'] = TRUE;
+                $_SESSION['id'] = $staff['id'];
+                $_SESSION['email'] = $staff['email'];
+                $_SESSION['user_name'] = $staff['name'];
+                $_SESSION['user_role'] = 'staff';
+                echo '<script>window.location="./staff-dashboard/index.php"</script>';
+            }
+        }
+    } else {
+        echo '<script>alert("Email not found.")</script>';
+    }
+
+    $stmt->close();
+    $con->close();
 }
 ?>

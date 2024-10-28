@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 05, 2024 at 10:56 AM
+-- Generation Time: Oct 28, 2024 at 11:40 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,24 +44,6 @@ INSERT INTO `admin` (`id`, `email`, `password`, `role`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `foodOrder`
---
-
-CREATE TABLE `foodOrder` (
-  `id` int(11) NOT NULL,
-  `customer_name` varchar(255) NOT NULL,
-  `customer_email` varchar(255) NOT NULL,
-  `customer_phone` varchar(20) NOT NULL,
-  `item_name` varchar(255) NOT NULL,
-  `food_type` varchar(255) DEFAULT NULL,
-  `food_count` int(11) DEFAULT 1,
-  `order_date` datetime NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `menu_item`
 --
 
@@ -81,22 +63,9 @@ CREATE TABLE `menu_item` (
 --
 
 INSERT INTO `menu_item` (`id`, `res_id`, `item_name`, `madeby`, `food_type`, `cuisine_type`, `price`, `image`) VALUES
-(28, 9, 'test123 e', 'tt tt', 'Main Cuisine', 'Srilankan', 1220, '2.png'),
-(29, 9, 'tttt', 'hb', 'Drink', '', 3456, '19938421.jpeg'),
-(30, 9, 'test11', 'me', 'Main Cuisine', 'Chinese', 1200, 'ast-compressed.jpeg'),
-(31, 9, 'new', 'sh', 'Main Cuisine', 'Italian', 1200, 'miles-morales-spider-man-dark-black-background-artwork-5k-8k-8000x4518-1902.png'),
-(32, 9, 'des', 'te', 'Dessert', '', 122, 'b69b4ab3268044c6ad1c10af7c07b888.jpg'),
-(33, 9, 'ww', 's', 'Main Cuisine', 'Srilankan', 22, '1.png'),
-(34, 9, 'dd', 'www', 'Main Cuisine', 'Srilankan', 222, 'b69b4ab3268044c6ad1c10af7c07b888.jpg'),
-(35, 9, 'www', 'dd', 'Main Cuisine', 'Srilankan', 111, '19938421.jpeg'),
-(36, 9, 'ee', 'ww', 'Main Cuisine', 'Srilankan', 11, '1.png'),
-(37, 9, 'rr', 'ee', 'Main Cuisine', 'Srilankan', 33, '19938421.jpeg'),
-(38, 9, 'eeeee', 'ee', 'Main Cuisine', 'Srilankan', 22, '19938421.jpeg'),
-(39, 9, 'aa', 'ss', 'Main Cuisine', 'Srilankan', 22, '1.png'),
-(42, 9, 's', 'ss', 'Main Cuisine', 'Srilankan', 22, '19938421.jpeg'),
-(43, 9, 'hs', 's', 'Main Cuisine', 'Srilankan', 22, '19938421.jpeg'),
-(44, 9, 'wh', 'dj', 'Main Cuisine', 'Srilankan', 22, '19938421.jpeg'),
-(45, 1, 'T1123', 'tes 123', 'Dessert', '', 1500, '1.png');
+(48, 1, 'Rice', 'Cheff Don', 'Main Cuisine', 'Srilankan', 1200, '11.jpeg'),
+(49, 1, 'Ice Cream Vanila', 'Mathew', 'Dessert', '', 500, '9.jpeg'),
+(50, 1, 'Noodles', 'Cheff Chan', 'Main Cuisine', 'Chinese', 700, '7.jpeg');
 
 -- --------------------------------------------------------
 
@@ -122,16 +91,59 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`id`, `user_id`, `admin_id`, `user_name`, `user_email`, `message`, `created_at`, `send_to`, `user_del_status`, `is_read`) VALUES
-(1, 15, NULL, 'test', 'my@gmail.com', 'test', '2024-10-04 15:39:53', NULL, 9, 0),
-(2, NULL, NULL, 'admin', 'my@gmail.com', 'uu', '2024-10-04 15:41:04', NULL, 0, 0),
-(4, NULL, 1, 'admin', 'admin@gmail.com', 'ss', '2024-10-04 15:44:46', NULL, 9, 0),
-(8, 15, NULL, 'test', 'my@gmail.com', 'oi', '2024-10-04 15:50:08', NULL, 9, 0),
-(10, NULL, 1, 'admin', 'admin@gmail.com', 'ii', '2024-10-04 15:51:32', NULL, 9, 0),
-(11, NULL, 1, 'admin', 'admin@gmail.com', 'ii', '2024-10-04 15:52:10', NULL, 9, 0),
-(12, NULL, 1, 'admin', 'admin@gmail.com', 'ok', '2024-10-04 15:54:05', NULL, 9, 0),
-(16, NULL, 1, 'admin', 'admin@gmail.com', 'oo', '2024-10-04 16:34:11', NULL, 1, 0),
-(17, NULL, 1, 'admin', 'admin@gmail.com', 'rr', '2024-10-04 16:36:31', 'my@gmail.com', 9, 0),
-(24, NULL, 1, 'admin', 'admin@gmail.com', 'ok', '2024-10-04 17:14:16', 'my@gmail.com', 0, 0);
+(26, 22, NULL, 'amara', 'a@gmail.com', 'test', '2024-10-27 02:39:17', 'admin@gmail.com', 9, 0),
+(27, NULL, 1, 'admin', 'admin@gmail.com', 'ooosnjdnj sjdjsnd', '2024-10-27 02:39:37', 'a@gmail.com', 9, 1),
+(28, NULL, 1, 'admin', 'admin@gmail.com', 'not show', '2024-10-27 02:49:20', 'a@gmail.com', 9, 0),
+(29, 22, NULL, 'amara', 'a@gmail.com', 'yt', '2024-10-27 02:55:10', NULL, 0, 0),
+(30, NULL, 1, 'admin', 'admin@gmail.com', 'iiuu', '2024-10-27 02:55:39', 'a@gmail.com', 9, 0),
+(31, 23, NULL, 'user1', 'user1@gmail.com', 'Hi change my phone number as 011223344.', '2024-10-28 09:41:54', NULL, 0, 0),
+(32, NULL, 1, 'admin', 'admin@gmail.com', 'ok', '2024-10-28 09:42:17', 'user1@gmail.com', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `order_date` datetime DEFAULT NULL,
+  `status` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `username`, `email`, `total_price`, `order_date`, `status`) VALUES
+(12, 23, 'user1', 'user1@gmail.com', 2400.00, '2024-10-28 08:56:08', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `item_name` varchar(255) DEFAULT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `item_name`, `price`, `quantity`) VALUES
+(16, 12, 'Rice', 1200.00, 1),
+(17, 12, 'Noodles', 700.00, 1),
+(18, 12, 'Ice Cream Vanila', 500.00, 1);
 
 -- --------------------------------------------------------
 
@@ -157,8 +169,7 @@ CREATE TABLE `reservations` (
 --
 
 INSERT INTO `reservations` (`id`, `table_id`, `name`, `email`, `phone`, `guests`, `date`, `time`, `status`, `approvedBy`) VALUES
-(1, 22, 'test', 'my@gmail.com', '011111111', 10, '2024-09-30', '22:11:00', 1, 'test@gmail.com'),
-(2, 19, 'test', 'my@gmail.com', '011111111', 2, '2024-09-26', '06:30:00', 1, 'test@gmail.com');
+(7, 25, 'user1', 'user1@gmail.com', '01123344556', 5, '2024-10-30', '01:30:00', 1, 'admin@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -178,11 +189,8 @@ CREATE TABLE `restaurant_tables` (
 --
 
 INSERT INTO `restaurant_tables` (`id`, `table_name`, `chair_count`, `status`) VALUES
-(19, 'TBL-01', 2, 0),
-(21, 'tt', 3, 0),
-(22, 'Tblw -test', 10, 1),
-(23, 'Tbl-004', 5, 0),
-(24, 'TBL-06', 6, 0);
+(25, 'TBL-01', 5, 1),
+(26, 'TBL-02', 8, 0);
 
 -- --------------------------------------------------------
 
@@ -210,9 +218,8 @@ CREATE TABLE `staff` (
 --
 
 INSERT INTO `staff` (`empId`, `firstName`, `lastName`, `email`, `jobTitle`, `mobileNo`, `addr`, `nic`, `dob`, `password`, `photo`, `status`) VALUES
-(2, 'ii', 'iioo', 'bdh@gmail.com', 'kitchenHelper', '977998', 'colomvo', '45678', '2023-07-18', 'a3aca2964e72000eea4c56cb341002a4', 'staff-image/66f1dce1c89da.png', 9),
-(3, 'yy', 'yy', 'yy@gmail.com', 'cashier', '099', 'hdh', '22', '2024-05-21', '8f60c8102d29fcd525162d02eed4566b', 'staff-image/66f1dee83ece9.png', 1),
-(4, 'test', 'yes', 'test@gmail.com', 'cashier', '111111', 'colombo', '111111v', '2024-09-04', 'e10adc3949ba59abbe56e057f20f883e', 'staff-image/66f1ee5d931ec.png', 1);
+(8, 'amal', 'per', 'a@gmail.com', 'cashier', '09999', 'col', '22222v', '1998-12-02', '+ZsjNuUCsVy5d4EV8ZJRFrb9467Jk2UVYAT+SpPNOCQUoXezu3cdhcoNEhpOc7sEjZvEiEetmPGeTjnxqjfZqQ==', 'staff-image/671da2cf732f6.jpg', 1),
+(9, 'ss', 'ss', 'ss@gmail.com', 'cashier', '0111', 'colombo', '12345678V', '1990-10-21', 'gqFy4qtzNJ5VyDEqCtuYncs63ApN0Kx9dlzQQRnXQjgD8ZUK9Cwwk4zyWGIdwrMkt0I6JRLgexF56S9Ra8x/tg==', 'staff-image/671f45eb088e2.jpeg', 1);
 
 -- --------------------------------------------------------
 
@@ -238,13 +245,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `gender`, `password`, `created_at`, `status`, `role`) VALUES
-(9, 'user1', 'user1@gmail.com', '0776531846', 'colombo', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-20 17:40:02', 1, 'user'),
-(10, 'test12', 'tt@gmail.com', '077652617', 'oop', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-21 11:46:58', 1, 'user'),
-(12, 'ttff', 'ttff@gmail.com', '1111111111', 'kk', 'Female', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-21 13:06:35', 1, 'user'),
-(13, 'tt', 'te@gmail.com', '2222222222', 'hsh', 'Male', '827ccb0eea8a706c4c34a16891f84e7b', '2024-09-22 20:56:54', 1, 'user'),
-(14, 'test', 'aa@gmail.com', '1111111111', 'nisns', 'Male', 'fcea920f7412b5da7be0cf42b8c93759', '2024-09-22 21:17:55', 1, 'user'),
-(15, 'test', 'my@gmail.com', '011111111', 'Kaduwela', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-26 18:25:49', 1, 'user'),
-(16, 'Ran', 'ran@gmail.com', '0118282882', 'colombo', 'Male', 'e10adc3949ba59abbe56e057f20f883e', '2024-09-26 19:18:24', 1, 'user');
+(22, 'amara', 'a@gmail.com', '0112929234', 'colombo', 'Male', '2+mWTzIIyuVlhh/fRrtXY1tTIBhf2dgq8HQqt15FbXy+J5A85zDdg7nzRA1fQeR7GyNCa+//UjWuwOq95/YRvA==', '2024-10-27 02:38:37', 1, 'user'),
+(23, 'user1', 'user1@gmail.com', '0112233441', 'Colombo', 'Male', 'j5vMPxpdJXcRAjhUttUyswxt5FFq/CIlfoT4GqZsMq+kqM6FHWYHu34jdA8tUvWpbZADcGO+U5d+rNOeGax5wQ==', '2024-10-28 07:48:11', 1, 'user'),
+(24, 'test', 'test@gmail.com', '0113833333', 'Colombo', 'Male', 'KkmeipWPY+ll7ID6klMkj5c3VEYHn/ukWWUJ5zZSRvnCQ3HuAEip//iQAj2UgVb/hqHIr5JM8VNo9fXLmgnB4A==', '2024-10-28 08:05:17', 0, 'user');
 
 --
 -- Indexes for dumped tables
@@ -256,12 +259,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `phone`, `address`, `gender`, `p
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
-
---
--- Indexes for table `foodOrder`
---
-ALTER TABLE `foodOrder`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `menu_item`
@@ -276,6 +273,19 @@ ALTER TABLE `messages`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_user` (`user_id`),
   ADD KEY `fk_admin` (`admin_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`);
 
 --
 -- Indexes for table `reservations`
@@ -314,46 +324,52 @@ ALTER TABLE `admin`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `foodOrder`
---
-ALTER TABLE `foodOrder`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `menu_item`
 --
 ALTER TABLE `menu_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `restaurant_tables`
 --
 ALTER TABLE `restaurant_tables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `empId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `empId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
@@ -365,6 +381,12 @@ ALTER TABLE `users`
 ALTER TABLE `messages`
   ADD CONSTRAINT `fk_admin` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`);
 
 --
 -- Constraints for table `reservations`

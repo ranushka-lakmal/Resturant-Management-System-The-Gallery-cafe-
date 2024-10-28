@@ -264,20 +264,7 @@ $result = $con->query($sql);
                             timer: 1500
                         });
                         updateCartDisplay();
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: 'Something went wrong while saving the order: ' + response.message,
-                        });
-                    }
-                },
-                error: function () {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'Something went wrong while saving the order!',
-                    });
+                    } 
                 }
             });
         }

@@ -1,6 +1,5 @@
 <?php
-session_start();
-include_once 'dbCon.php';
+include 'dbCon.php';
 $con = connect();
 
 if (isset($_POST['addItem'])) {
@@ -64,15 +63,23 @@ if (isset($_POST['addItem'])) {
 if (isset($_POST['addtable'])) {
     $table_name = $_POST['tablename'];
     $chair_count = $_POST['chaircount'];
+    $status = 0;
 
-    // Insert into restaurant_tables
-    $table_query = "INSERT INTO restaurant_tables (table_name, chair_count) VALUES ('$table_name','$chair_count')";
-    if ($con->query($table_query) === TRUE) {
+    $stmt = $con->prepare("INSERT INTO restaurant_tables (table_name, chair_count, status) VALUES (?, ?, ?)");
+    if ($stmt === false) {
+        die('Prepare failed: ' . htmlspecialchars($con->error));
+    }
+
+    $stmt->bind_param("sii", $table_name, $chair_count, $status);
+
+    if ($stmt->execute()) {
         echo '<script>alert("Table added successfully!")</script>';
         echo '<script>window.location="table-add.php";</script>';
     } else {
-        echo '<script>alert("Error adding table: ' . $con->error . '")</script>';
+        echo '<script>alert("Error adding table: ' . htmlspecialchars($stmt->error) . '")</script>';
     }
+
+    $stmt->close();
 }
 
 $con->close();

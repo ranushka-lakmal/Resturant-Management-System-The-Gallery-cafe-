@@ -53,7 +53,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <p>
-              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="icon-heart"aria-hidden="true"> </i> by <a href="#" target="_blank"> The Gallery Cafe</a>
+              AAAACopyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="icon-heart"aria-hidden="true"> </i> by <a href="#" target="_blank"> The Gallery Cafe</a>
             </p>
           </div>
         </div>

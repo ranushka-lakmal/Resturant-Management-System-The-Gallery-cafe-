@@ -1,6 +1,8 @@
 # Restaurant Management System
 
-![Restaurant Management System](https://via.placeholder.com/1000x300.png?text=Restaurant+Management+System)
+![Restaurant Management System]
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/ae1c9b4d-fcb8-4a6d-a54b-de0cecdc359a">
+
 
 ## 📜 Project Description
 
@@ -44,8 +46,14 @@ Each technology has been chosen to ensure smooth user experience, responsiveness
 ## 📸 Screenshots
 
 - **User Dashboard**: Showcases user interactions with reservations and orders.
+- <img width="1440" alt="image" src="https://github.com/user-attachments/assets/2fc95bec-b16a-4c75-b2bd-5a1b92a2d8c6">
+
 - **Admin Panel**: Comprehensive admin controls and an overview of restaurant metrics.
+- <img width="1440" alt="image" src="https://github.com/user-attachments/assets/2de7de3b-5edb-428c-bfef-9d879f9511d4">
+
+
 - **Staff Panel**: Simplified management interface for staff members to handle reservations and orders.
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/91be4a91-b009-4c66-9ac0-1cec72486710">
 
 ---
 
@@ -64,3 +72,6 @@ Follow these steps to set up the project locally:
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/your-username/restaurant-management-system.git
+
+## Any Questions 
+   **contact me - ranulakmal@gmail.com**

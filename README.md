@@ -72,5 +72,8 @@ Follow these steps to set up the project locally:
    ```bash
    git clone https://github.com/your-username/restaurant-management-system.git
 
+## Live Demo 
+https://www.youtube.com/watch?v=0a7alal_1ZQ&t=17s
+
 ## Any Questions 
    **contact me - ranulakmal@gmail.com**

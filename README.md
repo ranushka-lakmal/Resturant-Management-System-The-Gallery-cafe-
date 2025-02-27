@@ -1,6 +1,5 @@
 # Restaurant Management System
 
-![Restaurant Management System]
 <img width="1440" alt="image" src="https://github.com/user-attachments/assets/ae1c9b4d-fcb8-4a6d-a54b-de0cecdc359a">
 
 
